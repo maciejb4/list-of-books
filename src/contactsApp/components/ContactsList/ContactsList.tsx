@@ -24,7 +24,6 @@ export const ContactsList = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("data", data);
         data.sort((a: Contact, b: Contact) =>
           a.last_name.localeCompare(b.last_name)
         );
@@ -38,7 +37,6 @@ export const ContactsList = () => {
   }, [filteredContacts]);
 
   useEffect(() => {
-    console.log("useEffect");
     const checkedContactsIds = getCheckedContactsIds();
     croppedContacts &&
       setDisplayedContacts(
