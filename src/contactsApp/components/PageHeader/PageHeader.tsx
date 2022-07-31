@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 export const PageHeader = () => {
   const headerTitle = "Contacts Search";
   const description = "Find your favourite contacts!";
-  const image = 'https://source.unsplash.com/-0xCCPIbl3M';
+  const image = "https://source.unsplash.com/-0xCCPIbl3M";
   return (
     <Paper
       sx={{

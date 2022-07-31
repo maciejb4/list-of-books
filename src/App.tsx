@@ -3,7 +3,6 @@ import {Container, createTheme, CssBaseline, ThemeProvider} from "@mui/material"
 import './App.css';
 import { PageHeader } from './contactsApp/components/PageHeader/PageHeader';
 import {ContactsList} from "./contactsApp/components/ContactsList/ContactsList";
-import {ContactsContextProvider} from "./contactsApp/components/ContactsList/ContactsContext";
 
 
 const App = () => {
@@ -13,10 +12,8 @@ const App = () => {
         <CssBaseline />
         <Container maxWidth="lg">
           <main>
-              <ContactsContextProvider>
-                <PageHeader/>
-                <ContactsList/>
-              </ContactsContextProvider>
+            <PageHeader/>
+            <ContactsList/>
           </main>
         </Container>
       </ThemeProvider>
