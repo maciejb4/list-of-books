@@ -1,10 +1,10 @@
-import { Box, Card, Container, TextField, Typography } from "@mui/material";
+import { Box, Card, Container, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ContactDetails } from "../ContactDetails/ContactDetails";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useContactsList } from "./UseContactsList";
 import { debounce } from "ts-debounce";
 import { Contact, DisplayedContact } from "../../interfaces/ContactInterface";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export const ContactsList = () => {
   const [allContacts, setAllContacts] = useState<Contact[]>([]);
@@ -68,12 +68,12 @@ export const ContactsList = () => {
   const debouncedSearch = debounce(search, 300);
 
   const loadMoreData = () => {
-    if (filteredContacts.length < offset) {
-      setHasMore(false);
-      return;
+    if(filteredContacts.length >= offset) {
+      setCroppedContacts(filteredContacts.slice(0, offset + 30));
+      setOffset((prevOffset) => prevOffset + 30);
     }
-    setCroppedContacts(filteredContacts.slice(0, offset + 30));
-    setOffset((prevOffset) => prevOffset + 30);
+
+
   };
 
   const handleContactClick = (contactId: number, isChecked: boolean) => {
@@ -95,16 +95,11 @@ export const ContactsList = () => {
         </Card>
       </Container>
       <Container sx={{ py: 8 }} maxWidth="md">
-        {/*<Grid container spacing={4}>*/}
         <InfiniteScroll
-          dataLength={offset}
+          dataLength={croppedContacts.length}
           next={loadMoreData}
-          hasMore={hasMore}
-          loader={
-            <Typography variant="h6" component="h2">
-              Loading
-            </Typography>
-          }
+          hasMore={true}
+          loader={''}
         >
           {displayedContacts &&
             displayedContacts.map((element: DisplayedContact) => (
@@ -115,7 +110,6 @@ export const ContactsList = () => {
               />
             ))}
         </InfiniteScroll>
-        {/*</Grid>*/}
       </Container>
     </>
   );
